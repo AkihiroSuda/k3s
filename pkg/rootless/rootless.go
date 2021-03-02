@@ -128,8 +128,12 @@ func createParentOpt(stateDir string) (*parent.Opt, error) {
 	}
 
 	opt := &parent.Opt{
-		StateDir:    stateDir,
-		CreatePIDNS: true,
+		StateDir:        stateDir,
+		CreatePIDNS:     true,
+		CreateCgroupNS:  true,
+		CreateUTSNS:     true,
+		CreateIPCNS:     true,
+		EvacuateCgroup2: "k3s_evac",
 	}
 
 	mtu := 0
@@ -177,5 +181,6 @@ func createChildOpt() (*child.Opt, error) {
 	opt.CopyUpDriver = tmpfssymlink.NewChildDriver()
 	opt.MountProcfs = true
 	opt.Reaper = true
+	opt.EvacuateCgroup2 = true
 	return opt, nil
 }

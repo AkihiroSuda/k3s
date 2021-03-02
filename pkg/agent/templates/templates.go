@@ -23,7 +23,8 @@ const ContainerdConfigTemplate = `
   enable_selinux = {{ .NodeConfig.SELinux }}
 
 {{- if .IsRunningInUserNS }}
-  disable_cgroup = true
+# [WIP] FIXME: support cgroupless mode again
+  disable_cgroup = false
   disable_apparmor = true
   restrict_oom_score_adj = true
 {{end}}
